@@ -59,8 +59,8 @@ Use this dashboard to track my daily learning schedule. The **Code Link** column
 | Day | Core Topic | Problem 1 (Easy) | Problem 2 (Easy) | Problem 3 (Medium) | Code Link | Status |
 | :---: | :--- | :--- | :--- | :--- | :---: | :---: |
 
-| **Day 1** | Java Basics | Check Prime Number | Fibonacci Number | Find All Armstrong Numbers | [📂 Day 1 Folder](./01-Java-Basics) | ✅ Completed |
-| **Day 2** | Array Basics | Reverse an Array | Find Max and Min in Array | Find Second Largest Element | [📂 View Code](./02-Arrays) | ⏳ Pending |
+| **Day 1** | Java Basics | Check Prime Number | Fibonacci Number | Find All Armstrong Numbers | [📂 Day 1 Folder](./01-Java-Basics) | ✅ Completed |    
+| **Day 2** | Array Basics | Reverse an Array | Find Max and Min in Array | Find Second Largest Element | [📂 View Code](./02-Arrays) | ⏳ Pending |   
 | **Day 3** | Array Search | Linear Search | Binary Search | Search in Rotated Sorted Array | [📂 View Code](./02-Arrays) | ⏳ Pending |
 | **Day 4** | Two Pointers | Move Zeroes to End | Valid Palindrome | Two Sum (Sorted Array) | [📂 View Code](./02-Arrays) | ⏳ Pending |
 | **Day 5** | Sliding Window | Max Subarray (Kadane's) | Contains Duplicate II | Best Time to Buy & Sell Stock | [📂 View Code](./02-Arrays) | ⏳ Pending |
