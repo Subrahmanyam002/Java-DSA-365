@@ -1,0 +1,37 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		// your code goes here
+		Scanner sc=new Scanner(System.in);
+		int t=sc.nextInt();
+		while (t-->0){ 
+		int a=sc.nextInt();
+		int b=sc.nextInt();
+		int n=sc.nextInt();
+		if (a==b){
+		    System.out.println(0);
+		    continue;
+		} 
+		long req=a^b;
+		if(req<n){
+		    System.out.println(1);
+		    continue;
+		}
+		if(n>1){
+		    long x=n-1;
+		    long y=req^x;
+		    if(y<n){
+		        System.out.println(2);
+		        continue;
+		    }
+		}
+		System.out.println(-1);
+		}
+		sc.close();
+	}
+}
