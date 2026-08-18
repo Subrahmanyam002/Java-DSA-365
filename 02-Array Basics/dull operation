@@ -1,0 +1,61 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef {
+    public static void main(String[] args) throws java.lang.Exception {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder out = new StringBuilder();
+
+        int t = Integer.parseInt(br.readLine().trim());
+
+        while (t-- > 0) {
+
+            long n = Long.parseLong(br.readLine().trim());
+            boolean found = false;
+
+            for (long a = 1; a * a <= n; a++) {
+
+                if (n % a != 0)
+                    continue;
+
+                long b = n / a;
+
+                if ((a & b) == b) {
+
+                    long x = a;
+                    long y = a ^ b;
+
+                    if (x < (1L << 30) && y < (1L << 30)) {
+                        out.append(x).append(' ')
+                           .append(y).append('\n');
+
+                        found = true;
+                        break;
+                    }
+                }
+
+                if ((a & b) == a) {
+
+                    long x = b;
+                    long y = b ^ a;
+
+                    if (x < (1L << 30) && y < (1L << 30)) {
+                        out.append(x).append(' ')
+                           .append(y).append('\n');
+
+                        found = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!found) {
+                out.append(n).append(" 0\n");
+            }
+        }
+
+        System.out.print(out);
+    }
+}
