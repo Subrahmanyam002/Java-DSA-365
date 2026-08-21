@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int t = scanner.nextInt();
+
+        while (t-- > 0) {
+            String s = scanner.next();
+            int first = Integer.parseInt(s.substring(0,2));
+            int second = Integer.parseInt(s.substring(3,5));
+            boolean ddmm = first >= 1 && first <= 31 && second >= 1 && second <= 12;
+            boolean mmdd = first >= 1 && first <= 12 && second >= 1 && second <= 31;
+            if(ddmm&&mmdd){
+                System.out.println("BOTH");
+            }else if(ddmm){
+                System.out.println("DD/MM/YYYY");
+            }else{
+                System.out.println("MM/DD/YYYY");
+            }
+            // Your code goes here
+        }
+    scanner.close();
+    }
+}
