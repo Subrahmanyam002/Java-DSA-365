@@ -1,0 +1,85 @@
+import java.util.*;
+import java.io.*;
+
+class Codechef {
+    public static void main(String[] args) throws java.lang.Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine().trim());
+        
+        StringBuilder out = new StringBuilder();
+        
+        while (t-- > 0) {
+            String[] nm = br.readLine().trim().split("\\s+");
+            int n = Integer.parseInt(nm[0]);
+            long m = Long.parseLong(nm[1]);
+            String s = br.readLine().trim();
+            
+            long totalOnes = 0;
+            for (int i = 0; i < n; i++) {
+                if (s.charAt(i) == '1') {
+                    totalOnes++;
+                }
+            }
+            
+            long totalSum = totalOnes * m;
+            
+            // Edge case: All zeros
+            if (totalSum == 0) {
+                out.append((long) n * m).append("\n");
+                continue;
+            }
+            
+            // If total sum is odd, we cannot split it equally
+            if (totalSum % 2 != 0) {
+                out.append(0).append("\n");
+                continue;
+            }
+            
+            long target = totalSum / 2;
+            long ans = 0;
+            
+            if (m % 2 == 0) {
+                // If M is even, target sum might be achieved within the first 2 copies of A
+                long curSum = 0;
+                // We only need to check up to 2 * N characters
+                String b = s + s;
+                for (int i = 0; i < b.length(); i++) {
+                    curSum += (b.charAt(i) - '0');
+                    if (curSum == target) {
+                        ans++;
+                    }
+                }
+                // Since it repeats every period of S's totalOnes, we can multiply or count carefully.
+                // Actually, for even M, the number of valid indices is fixed based on leading/trailing zeros.
+                // Let's use the cleaner prefix-count approach:
+            }
+            
+            // Let's use a unified approach:
+            // Count how many times prefix sum equals target
+            long curSum = 0;
+            if (m % 2 == 0) {
+                // For even M, we can just look at 2 copies of A
+                String b = s + s;
+                long countTarget = 0;
+                for (int i = 0; i < b.length(); i++) {
+                    curSum += (b.charAt(i) - '0');
+                    if (curSum == target) {
+                        countTarget++;
+                    }
+                }
+                out.append(countTarget).append("\n");
+            } else {
+                // For odd M, we look at 1 copy of A
+                long countTarget = 0;
+                for (int i = 0; i < n; i++) {
+                    curSum += (s.charAt(i) - '0');
+                    if (curSum == target) {
+                        countTarget++;
+                    }
+                }
+                out.append(countTarget).append("\n");
+            }
+        }
+        System.out.print(out);
+    }
+}
