@@ -1,0 +1,33 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int T = sc.nextInt();
+
+        while (T-- > 0) {
+            String s = sc.next();
+
+            char[] digits = s.toCharArray();
+
+            int i = digits.length - 1;
+
+            // Add 1 from the last digit
+            while (i >= 0 && digits[i] == '9') {
+                digits[i] = '0';
+                i--;
+            }
+
+            if (i >= 0) {
+                digits[i]++;
+                System.out.println(new String(digits));
+            } else {
+                // All digits were 9, e.g. 99 -> 100
+                System.out.println("1" + new String(digits));
+            }
+        }
+
+        sc.close();
+    }
+}
