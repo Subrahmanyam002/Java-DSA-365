@@ -1,0 +1,13 @@
+class Solution {
+    public long flipBits(long n) {
+        // write your code here 
+        int mab=0;
+long temp=n;
+while(temp>1){
+    temp=temp>>1;
+    mab++;
+}
+    long result = n^(1L<<mab)^1L;
+    return result;
+    }
+}
