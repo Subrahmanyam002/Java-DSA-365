@@ -1,0 +1,24 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+{
+    public static void main (String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        // Read the number of test cases
+        int t = sc.nextInt();
+        
+        while(t-- > 0)
+        {
+            // Read the number of sets
+            int x = sc.nextInt();
+            
+            // Calculate total squats (15 squats per set) and print
+            System.out.println(x * 15);
+        }
+        
+        sc.close();
+    }
+}
