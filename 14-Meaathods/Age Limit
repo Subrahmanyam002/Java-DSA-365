@@ -1,0 +1,23 @@
+// Solution
+
+function checkEligibility(tests){
+  let t = parseInt(tests[0]);
+  for(let i = 1; i <= t; i++){
+    const nums = tests[i].split(' ');
+    let x = parseInt(nums[0]);
+    let y = parseInt(nums[1]);
+    let a = parseInt(nums[2]);
+    if(a >= x && a < y) {
+       console.log("YES");
+    } else {
+       console.log("NO");
+    }
+  }
+}
+
+// Input related code. Please do not change. 
+process.stdin.setEncoding('utf8');
+process.stdin.on('data', function(input) {
+  const tests = input.split('\n');
+  checkEligibility(tests)
+});
