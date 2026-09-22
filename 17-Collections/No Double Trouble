@@ -1,0 +1,18 @@
+import java.util.*;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<String> playlist = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            playlist.add(sc.next());
+        }
+
+        Set<String> seen = new LinkedHashSet<>(playlist); // preserves insertion order
+        for (String song : seen) {
+            System.out.println(song);
+        }
+    }
+}
