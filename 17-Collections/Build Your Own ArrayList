@@ -1,0 +1,67 @@
+import java.util.*;
+
+class MyArrayList {
+    private int[] data;
+    private int size;
+
+    public MyArrayList() {
+        data = new int[2]; // start small
+        size = 0;
+    }
+
+    public void add(int value) {
+        if (size == data.length) {
+            resize();
+        }
+        data[size++] = value;
+    }
+
+    public int get(int index) {
+        return data[index];
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public void print() {
+        for (int i = 0; i < size; i++) {
+            System.out.print(data[i]);
+            if (i < size - 1)
+            System.out.print(" ");
+        }
+        System.out.println();
+    }
+
+    private void resize() {
+        int[] newData = new int[data.length * 2];
+        for (int i = 0; i < data.length; i++) {
+            newData[i] = data[i];
+        }
+        data = newData;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        MyArrayList list = new MyArrayList();
+        int q = sc.nextInt();
+        sc.nextLine();
+
+        for (int i = 0; i < q; i++) {
+            String line = sc.nextLine();
+            if (line.startsWith("add")) {
+                int val = Integer.parseInt(line.split(" ")[1]);
+                list.add(val);
+            } else if (line.startsWith("get")) {
+                int idx = Integer.parseInt(line.split(" ")[1]);
+                System.out.println(list.get(idx));
+            } else if (line.equals("size")) {
+                System.out.println(list.size());
+            } else if (line.equals("print")) {
+                list.print();
+            }
+        }
+    }
+}
