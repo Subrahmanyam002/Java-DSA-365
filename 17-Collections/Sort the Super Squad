@@ -1,0 +1,43 @@
+import java.util.*;
+
+class Superhero {
+    String name;
+    int powerLevel;
+    String city;
+
+    Superhero(String name, int powerLevel, String city) {
+        this.name = name;
+        this.powerLevel = powerLevel;
+        this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return name + " (" + powerLevel + ") - " + city;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<Superhero> heroes = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            String name = sc.next();
+            int powerLevel = sc.nextInt();
+            String city = sc.next();
+            heroes.add(new Superhero(name, powerLevel, city));
+        }
+
+        heroes.sort((a, b) -> {
+            if (b.powerLevel != a.powerLevel)
+                return Integer.compare(b.powerLevel, a.powerLevel); // Descending power
+            return a.name.compareTo(b.name); // Ascending name
+        });
+
+        for (Superhero hero : heroes) {
+            System.out.println(hero);
+        }
+    }
+}
