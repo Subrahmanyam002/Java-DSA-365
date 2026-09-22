@@ -1,0 +1,21 @@
+import java.util.*;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String text = sc.nextLine();
+        String[] words = text.toLowerCase().split(" ");
+
+        Map<String, Integer> freqMap = new HashMap<>();
+        for (String word : words) {
+            freqMap.put(word, freqMap.getOrDefault(word, 0) + 1);
+        }
+
+        List<String> sortedWords = new ArrayList<>(freqMap.keySet());
+        Collections.sort(sortedWords);
+
+        for (String word : sortedWords) {
+            System.out.println(word + ": " + freqMap.get(word));
+        }
+    }
+}
