@@ -1,0 +1,130 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ArrayDeque;
+import java.util.Queue;
+
+public class Main {
+
+    // Doubly Linked List Node for O(1) arbitrary removal
+    static class Node {
+        int val;
+        Node prev, next;
+
+        Node(int val) {
+            this.val = val;
+        }
+    }
+
+    static Node head = null;
+    static Node tail = null;
+    static long sum = 0;
+    static long count = 0;
+
+    // Map each patience value to a queue of Node references to find the FIRST occurrence in O(1)
+    static Map<Integer, Queue<Node>> valToNodes = new HashMap<>();
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        String firstLine = br.readLine();
+        if (firstLine == null || firstLine.trim().isEmpty()) return;
+        
+        int n = Integer.parseInt(firstLine.trim());
+        
+        String line2 = br.readLine();
+        if (line2 != null && !line2.trim().isEmpty()) {
+            StringTokenizer st = new StringTokenizer(line2);
+            for (int i = 0; i < n && st.hasMoreTokens(); i++) {
+                int x = Integer.parseInt(st.nextToken());
+                addTail(x);
+            }
+        }
+
+        String qLine = br.readLine();
+        if (qLine == null || qLine.trim().isEmpty()) return;
+        int q = Integer.parseInt(qLine.trim());
+
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < q; i++) {
+            String opLine = br.readLine();
+            if (opLine == null) break;
+            
+            StringTokenizer st = new StringTokenizer(opLine);
+            String type = st.nextToken();
+
+            if (type.equals("ENTER")) {
+                int x = Integer.parseInt(st.nextToken());
+                addTail(x);
+            } else if (type.equals("SERVE")) {
+                if (head != null) {
+                    removeNode(head);
+                }
+            } else if (type.equals("REMOVE")) {
+                int x = Integer.parseInt(st.nextToken());
+                Queue<Node> nodes = valToNodes.get(x);
+                if (nodes != null && !nodes.isEmpty()) {
+                    Node target = nodes.peek(); // First occurrence
+                    removeNode(target);
+                }
+            }
+
+            if (count == 0) {
+                sb.append("EMPTY\n");
+            } else {
+                sb.append(sum / count).append("\n");
+            }
+        }
+
+        System.out.print(sb);
+    }
+
+    private static void addTail(int x) {
+        Node node = new Node(x);
+        valToNodes.putIfAbsent(x, new ArrayDeque<>());
+        valToNodes.get(x).add(node);
+
+        if (tail == null) {
+            head = tail = node;
+        } else {
+            tail.next = node;
+            node.prev = tail;
+            tail = node;
+        }
+        sum += x;
+        count++;
+    }
+
+    private static void removeNode(Node node) {
+        if (node == null) return;
+
+        // Remove from value map queue
+        Queue<Node> nodes = valToNodes.get(node.val);
+        if (nodes != null) {
+            nodes.poll();
+            if (nodes.isEmpty()) {
+                valToNodes.remove(node.val);
+            }
+        }
+
+        // Unlink node from doubly linked list
+        if (node.prev != null) {
+            node.prev.next = node.next;
+        } else {
+            head = node.next; // Removing head
+        }
+
+        if (node.next != null) {
+            node.next.prev = node.prev;
+        } else {
+            tail = node.prev; // Removing tail
+        }
+
+        sum -= node.val;
+        count--;
+    }
+}
