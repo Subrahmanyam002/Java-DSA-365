@@ -1,0 +1,53 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        String line = br.readLine();
+        if (line == null || line.trim().isEmpty()) return;
+        
+        int n = Integer.parseInt(line.trim());
+        int[] a = new int[n];
+        
+        String scoresLine = br.readLine();
+        if (scoresLine == null) return;
+        
+        StringTokenizer st = new StringTokenizer(scoresLine);
+        for (int i = 0; i < n; i++) {
+            a[i] = Integer.parseInt(st.nextToken());
+        }
+        
+        // Monotonic stack storing previous scores
+        Deque<Integer> stack = new ArrayDeque<>();
+        StringBuilder sb = new StringBuilder();
+        
+        for (int i = 0; i < n; i++) {
+            // Pop elements from stack that are <= current score
+            while (!stack.isEmpty() && stack.peek() <= a[i]) {
+                stack.pop();
+            }
+            
+            // If stack is empty, no previous element is strictly greater
+            if (stack.isEmpty()) {
+                sb.append("-1");
+            } else {
+                sb.append(stack.peek());
+            }
+            
+            if (i < n - 1) {
+                sb.append(" ");
+            }
+            
+            // Push current score to stack
+            stack.push(a[i]);
+        }
+        
+        System.out.println(sb);
+    }
+}
