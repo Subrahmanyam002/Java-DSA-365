@@ -1,0 +1,46 @@
+import java.io.*;
+import java.util.*;
+
+class Codechef {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine().trim());
+        StringBuilder sb = new StringBuilder();
+
+        while (T-- > 0) {
+            int N = Integer.parseInt(br.readLine().trim());
+            int[] a = new int[N];
+            String[] s = br.readLine().trim().split(" ");
+            
+            // freq[v] stores the frequency of number v (numbers range from 1 to 10)
+            int[] freq = new int[11];
+            // freqOfFreq[f] stores how many numbers have a frequency of f
+            int[] freqOfFreq = new int[N + 1];
+
+            for (int i = 0; i < N; i++) {
+                a[i] = Integer.parseInt(s[i]);
+                freq[a[i]]++;
+            }
+
+            // Populate the frequency of frequencies
+            for (int i = 1; i <= 10; i++) {
+                if (freq[i] > 0) {
+                    freqOfFreq[freq[i]]++;
+                }
+            }
+
+            // Find the frequency with the maximum count
+            int ans = 1;
+            int maxCount = freqOfFreq[1];
+            for (int i = 2; i <= N; i++) {
+                if (freqOfFreq[i] > maxCount) {
+                    maxCount = freqOfFreq[i];
+                    ans = i;
+                }
+            }
+
+            sb.append(ans).append("\n");
+        }
+        System.out.print(sb);
+    }
+}
