@@ -1,0 +1,24 @@
+import java.util.Scanner;
+
+class Codechef {
+    public static void main(String[] args) throws java.lang.Exception {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Check if there are test cases to read
+        if (scanner.hasNextInt()) {
+            int t = scanner.nextInt();
+            while (t-- > 0) {
+                int n = scanner.nextInt();
+                
+                // If N is even, the answer is N. If N is odd, the answer is N - 1.
+                if (n % 2 == 0) {
+                    System.out.println(n);
+                } else {
+                    System.out.println(n - 1);
+                }
+            }
+        }
+        
+        scanner.close();
+    }
+}
