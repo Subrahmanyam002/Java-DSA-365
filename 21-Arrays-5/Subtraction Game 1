@@ -1,0 +1,41 @@
+import java.util.*;
+import java.io.*;
+
+class Codechef
+{
+    // Helper function to calculate the Greatest Common Divisor (GCD) using Euclidean algorithm
+    public static long gcd(long a, long b) {
+        if (b == 0) {
+            return a;
+        }
+        return gcd(b, a % b);
+    }
+
+    public static void main (String[] args) throws java.lang.Exception
+    {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Check if there are test cases
+        if (!scanner.hasNextInt()) return;
+        int t = scanner.nextInt();
+        
+        while (t-- > 0) {
+            int n = scanner.nextInt();
+            long result = 0;
+            
+            for (int i = 0; i < n; i++) {
+                long num = scanner.nextLong();
+                if (i == 0) {
+                    result = num;
+                } else {
+                    result = gcd(result, num);
+                }
+            }
+            
+            // Output the final GCD for the current test case
+            System.out.println(result);
+        }
+        
+        scanner.close();
+    }
+}
