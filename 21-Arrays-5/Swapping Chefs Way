@@ -1,0 +1,48 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+{
+    public static void main (String[] args) throws java.lang.Exception
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        if (!sc.hasNextInt()) return;
+        int t = sc.nextInt();
+        
+        while (t-- > 0) {
+            int n = sc.nextInt();
+            String s = sc.next();
+            
+            char[] arr = s.toCharArray();
+            
+            // Iterate over the first half of the string
+            for (int i = 0; i < n / 2; i++) {
+                // If the left character is greater than its mirror character, swap them
+                if (arr[i] > arr[n - 1 - i]) {
+                    char temp = arr[i];
+                    arr[i] = arr[n - 1 - i];
+                    arr[n - 1 - i] = temp;
+                }
+            }
+            
+            // Check if the array is sorted
+            boolean isSorted = true;
+            for (int i = 0; i < n - 1; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    isSorted = false;
+                    break;
+                }
+            }
+            
+            if (isSorted) {
+                System.out.println("YES");
+            } else {
+                System.out.println("NO");
+            }
+        }
+        
+        sc.close();
+    }
+}
