@@ -1,0 +1,45 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+{
+    public static void main (String[] args) throws java.lang.Exception
+    {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Check if there are any test cases
+        if (!scanner.hasNextInt()) return;
+        int t = scanner.nextInt();
+        
+        while (t-- > 0) {
+            long x = scanner.nextLong();
+            long y = scanner.nextLong();
+            String s = scanner.next();
+            
+            long totalOnes = 0;
+            long maxStreak = 0;
+            long currentStreak = 0;
+            
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == '1') {
+                    totalOnes++;
+                    currentStreak++;
+                } else {
+                    currentStreak = 0;
+                }
+                
+                // Update the maximum streak found so far
+                if (currentStreak > maxStreak) {
+                    maxStreak = currentStreak;
+                }
+            }
+            
+            // Calculate final salary including the bonus
+            long totalSalary = (totalOnes * x) + (maxStreak * y);
+            System.out.println(totalSalary);
+        }
+        
+        scanner.close();
+    }
+}
